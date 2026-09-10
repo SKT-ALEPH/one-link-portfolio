@@ -1,0 +1,814 @@
+{
+  "executedAt": "2026-09-10T08:42:28.373Z",
+  "origin": "https://portfolio-passkey.duckdns.org",
+  "environment": "Production HTTPS with Chromium virtual CTAP2 authenticators. Not a physical passkey or Google Password Manager.",
+  "result": "passed",
+  "checks": [
+    "public page 200",
+    "anonymous private 401",
+    "actual browser registration for two accounts",
+    "two keys in account A",
+    "A→B and B→A 403",
+    "body owner spoof ignored",
+    "3 notes unchanged per account",
+    "logout token replay 401",
+    "remaining key login 200",
+    "challenge replay 400",
+    "deleted key login 403",
+    "no browser runtime errors"
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": null
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/options",
+      "request": {
+        "name": "live-check-A 첫 키",
+        "invitation": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "challengeId": "Ax5kmg5cMBC3M5jbMYli331PkC1YcnLFz_S75wD3w8k",
+        "options": {
+          "challenge": "JInQHsf1mlzaTHr1gWozcjCxQ-KinfRi3z7x0PLVSsg",
+          "rp": {
+            "name": "One Link · 나만의 공간",
+            "id": "portfolio-passkey.duckdns.org"
+          },
+          "user": {
+            "id": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+            "name": "live-check-A",
+            "displayName": "live-check-A"
+          },
+          "pubKeyCredParams": [
+            {
+              "alg": -7,
+              "type": "public-key"
+            },
+            {
+              "alg": -257,
+              "type": "public-key"
+            }
+          ],
+          "timeout": 120000,
+          "attestation": "none",
+          "excludeCredentials": [],
+          "authenticatorSelection": {
+            "residentKey": "required",
+            "userVerification": "required",
+            "requireResidentKey": true
+          },
+          "extensions": {
+            "credProps": true
+          },
+          "hints": []
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/verify",
+      "request": {
+        "challengeId": "Ax5kmg5cMBC3M5jbMYli331PkC1YcnLFz_S75wD3w8k",
+        "credential": {
+          "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+          "rawId": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+          "response": {
+            "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikMJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAILxV8m8y_5fZgZd5b5ej_lNSUOm5CD5sbe1VUvPP6Vh6pQECAyYgASFYIH31UvfC3ke_6WAg2gu6HBZZxToQgshAfue7U894Tp5uIlgg2MrKbHIGWamSROD-2ucbN-b8uLEs1ufeDWUP22ZDcWQ",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiSkluUUhzZjFtbHphVEhyMWdXb3pjakN4US1LaW5mUmkzejd4MFBMVlNzZyIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "transports": [
+              "internal"
+            ],
+            "publicKeyAlgorithm": -7,
+            "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEffVS98LeR7_pYCDaC7ocFlnFOhCCyEB-57tTz3hOnm7YyspscgZZqZJE4P7a5xs35vy4sSzW594NZQ_bZkNxZA",
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAILxV8m8y_5fZgZd5b5ej_lNSUOm5CD5sbe1VUvPP6Vh6pQECAyYgASFYIH31UvfC3ke_6WAg2gu6HBZZxToQgshAfue7U894Tp5uIlgg2MrKbHIGWamSROD-2ucbN-b8uLEs1ufeDWUP22ZDcWQ"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {
+            "credProps": {
+              "rk": true
+            }
+          },
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 201,
+      "response": {
+        "verified": true
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": {
+          "id": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+          "name": "live-check-A"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "dMgytAy6IaAKN7r0ZC8Tz4ndcIzc8dV_VVjehq3vJQk",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "2Km1-qKxJUuqVy7TsMG2QuBoHK5Qzi6AccOu6r7WnZU",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "de3TjuOATMYaxfi8i1Ro-D2UTKKiiuKkhfIl254iT0Y",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/passkeys",
+      "request": null,
+      "status": 200,
+      "response": {
+        "keys": [
+          {
+            "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+            "name": "live-check-A 첫 키",
+            "createdAt": "2026-09-10T08:42:57.070Z",
+            "current": true,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYIH31UvfC3ke_6WAg2gu6HBZZxToQgshAfue7U894Tp5uIlgg2MrKbHIGWamSROD-2ucbN-b8uLEs1ufeDWUP22ZDcWQ"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/passkeys",
+      "request": null,
+      "status": 200,
+      "response": {
+        "keys": [
+          {
+            "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+            "name": "live-check-A 첫 키",
+            "createdAt": "2026-09-10T08:42:57.070Z",
+            "current": true,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYIH31UvfC3ke_6WAg2gu6HBZZxToQgshAfue7U894Tp5uIlgg2MrKbHIGWamSROD-2ucbN-b8uLEs1ufeDWUP22ZDcWQ"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/options",
+      "request": {
+        "name": "검증 A 예비 키",
+        "invitation": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "challengeId": "EJethzw6hFdkuWX7T3ywgGfXTlBIgREUADn64ZVfIZc",
+        "options": {
+          "challenge": "uvKzxc5ek8sfd4aIZt4m-c_ej2seNv5CEd8GcvkMLf0",
+          "rp": {
+            "name": "One Link · 나만의 공간",
+            "id": "portfolio-passkey.duckdns.org"
+          },
+          "user": {
+            "id": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+            "name": "live-check-A",
+            "displayName": "live-check-A"
+          },
+          "pubKeyCredParams": [
+            {
+              "alg": -7,
+              "type": "public-key"
+            },
+            {
+              "alg": -257,
+              "type": "public-key"
+            }
+          ],
+          "timeout": 120000,
+          "attestation": "none",
+          "excludeCredentials": [
+            {
+              "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+              "transports": [
+                "internal"
+              ],
+              "type": "public-key"
+            }
+          ],
+          "authenticatorSelection": {
+            "residentKey": "required",
+            "userVerification": "required",
+            "requireResidentKey": true
+          },
+          "extensions": {
+            "credProps": true
+          },
+          "hints": []
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/verify",
+      "request": {
+        "challengeId": "EJethzw6hFdkuWX7T3ywgGfXTlBIgREUADn64ZVfIZc",
+        "credential": {
+          "id": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "rawId": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "response": {
+            "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikMJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAIJjVjze-9CUiE6SSENMIG98PL8xMrkSwoK0JVABKQWCwpQECAyYgASFYILq_gPoNS7lDH42wTHezOH485kOmro5ygGLDb9fJZlozIlggn3ua2ba9Dcrt5UPz21rQFkWak2rXiOJOcopniTjhd0Q",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoidXZLenhjNWVrOHNmZDRhSVp0NG0tY19lajJzZU52NUNFZDhHY3ZrTUxmMCIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "transports": [
+              "internal"
+            ],
+            "publicKeyAlgorithm": -7,
+            "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEur-A-g1LuUMfjbBMd7M4fjzmQ6aujnKAYsNv18lmWjOfe5rZtr0Nyu3lQ_PbWtAWRZqTateI4k5yimeJOOF3RA",
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAIJjVjze-9CUiE6SSENMIG98PL8xMrkSwoK0JVABKQWCwpQECAyYgASFYILq_gPoNS7lDH42wTHezOH485kOmro5ygGLDb9fJZlozIlggn3ua2ba9Dcrt5UPz21rQFkWak2rXiOJOcopniTjhd0Q"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {
+            "credProps": {
+              "rk": true
+            }
+          },
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 201,
+      "response": {
+        "verified": true
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": {
+          "id": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+          "name": "live-check-A"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "dMgytAy6IaAKN7r0ZC8Tz4ndcIzc8dV_VVjehq3vJQk",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "2Km1-qKxJUuqVy7TsMG2QuBoHK5Qzi6AccOu6r7WnZU",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "de3TjuOATMYaxfi8i1Ro-D2UTKKiiuKkhfIl254iT0Y",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/passkeys",
+      "request": null,
+      "status": 200,
+      "response": {
+        "keys": [
+          {
+            "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+            "name": "live-check-A 첫 키",
+            "createdAt": "2026-09-10T08:42:57.070Z",
+            "current": false,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYIH31UvfC3ke_6WAg2gu6HBZZxToQgshAfue7U894Tp5uIlgg2MrKbHIGWamSROD-2ucbN-b8uLEs1ufeDWUP22ZDcWQ"
+          },
+          {
+            "id": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+            "name": "검증 A 예비 키",
+            "createdAt": "2026-09-10T08:42:57.442Z",
+            "current": true,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYILq_gPoNS7lDH42wTHezOH485kOmro5ygGLDb9fJZlozIlggn3ua2ba9Dcrt5UPz21rQFkWak2rXiOJOcopniTjhd0Q"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": null
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/options",
+      "request": {
+        "name": "live-check-B 첫 키",
+        "invitation": "[REDACTED]"
+      },
+      "status": 200,
+      "response": {
+        "challengeId": "ck7vPvbELH1eOxrIxa5wTGmk97g-OWkLd9n8-F_Q3E0",
+        "options": {
+          "challenge": "DB4uwfLaB9KxT6O-Lm2dtvWAjs4n1AqTA8x9CjCRjuw",
+          "rp": {
+            "name": "One Link · 나만의 공간",
+            "id": "portfolio-passkey.duckdns.org"
+          },
+          "user": {
+            "id": "XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A",
+            "name": "live-check-B",
+            "displayName": "live-check-B"
+          },
+          "pubKeyCredParams": [
+            {
+              "alg": -7,
+              "type": "public-key"
+            },
+            {
+              "alg": -257,
+              "type": "public-key"
+            }
+          ],
+          "timeout": 120000,
+          "attestation": "none",
+          "excludeCredentials": [],
+          "authenticatorSelection": {
+            "residentKey": "required",
+            "userVerification": "required",
+            "requireResidentKey": true
+          },
+          "extensions": {
+            "credProps": true
+          },
+          "hints": []
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register/verify",
+      "request": {
+        "challengeId": "ck7vPvbELH1eOxrIxa5wTGmk97g-OWkLd9n8-F_Q3E0",
+        "credential": {
+          "id": "YitViOigXNhJxVGcVaFesD0k0EZ51Y4wMqG03pagzgE",
+          "rawId": "YitViOigXNhJxVGcVaFesD0k0EZ51Y4wMqG03pagzgE",
+          "response": {
+            "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikMJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAIGIrVYjooFzYScVRnFWhXrA9JNBGedWOMDKhtN6WoM4BpQECAyYgASFYIOUQuGHL8OZ9IfQQoSDriawfWmqMImvb65Sp2YPokAHSIlgggxm44KHFn356X3TOW2zLovq8NG3fSn453BkIYc42FBQ",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiREI0dXdmTGFCOUt4VDZPLUxtMmR0dldBanM0bjFBcVRBOHg5Q2pDUmp1dyIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "transports": [
+              "internal"
+            ],
+            "publicKeyAlgorithm": -7,
+            "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5RC4Ycvw5n0h9BChIOuJrB9aaowia9vrlKnZg-iQAdKDGbjgocWffnpfdM5bbMui-rw0bd9KfjncGQhhzjYUFA",
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZtFAAAAAQECAwQFBgcIAQIDBAUGBwgAIGIrVYjooFzYScVRnFWhXrA9JNBGedWOMDKhtN6WoM4BpQECAyYgASFYIOUQuGHL8OZ9IfQQoSDriawfWmqMImvb65Sp2YPokAHSIlgggxm44KHFn356X3TOW2zLovq8NG3fSn453BkIYc42FBQ"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {
+            "credProps": {
+              "rk": true
+            }
+          },
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 201,
+      "response": {
+        "verified": true
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": {
+          "id": "XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A",
+          "name": "live-check-B"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/passkeys",
+      "request": null,
+      "status": 200,
+      "response": {
+        "keys": [
+          {
+            "id": "YitViOigXNhJxVGcVaFesD0k0EZ51Y4wMqG03pagzgE",
+            "name": "live-check-B 첫 키",
+            "createdAt": "2026-09-10T08:42:59.367Z",
+            "current": true,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYIOUQuGHL8OZ9IfQQoSDriawfWmqMImvb65Sp2YPokAHSIlgggxm44KHFn356X3TOW2zLovq8NG3fSn453BkIYc42FBQ"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "4EJV4oNitl5YjBIimTztJXEJEl3YM_CYxptbkEO_9Gc",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "rozuvmKCf3pkYExhEzeOljieGfNPsZe0ohWeQM1LFX4",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "uV787aDKuubsBmui6vN277E4yLZopU7von5t9SW3L8c",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A/private",
+      "request": null,
+      "status": 403,
+      "response": {
+        "code": "NOT_YOUR_DATA",
+        "error": "다른 계정의 비공개 자료에는 접근할 수 없습니다."
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das/private",
+      "request": null,
+      "status": 403,
+      "response": {
+        "code": "NOT_YOUR_DATA",
+        "error": "다른 계정의 비공개 자료에는 접근할 수 없습니다."
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/private",
+      "request": {
+        "userId": "XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A"
+      },
+      "status": 200,
+      "response": {
+        "ownerId": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "dMgytAy6IaAKN7r0ZC8Tz4ndcIzc8dV_VVjehq3vJQk",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "2Km1-qKxJUuqVy7TsMG2QuBoHK5Qzi6AccOu6r7WnZU",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "de3TjuOATMYaxfi8i1Ro-D2UTKKiiuKkhfIl254iT0Y",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "dMgytAy6IaAKN7r0ZC8Tz4ndcIzc8dV_VVjehq3vJQk",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "2Km1-qKxJUuqVy7TsMG2QuBoHK5Qzi6AccOu6r7WnZU",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "de3TjuOATMYaxfi8i1Ro-D2UTKKiiuKkhfIl254iT0Y",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "XhzOYc9ZKwVevoR7_rQ-A37G0mSK0V4K4vtdP_q0B1A",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "4EJV4oNitl5YjBIimTztJXEJEl3YM_CYxptbkEO_9Gc",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "rozuvmKCf3pkYExhEzeOljieGfNPsZe0ohWeQM1LFX4",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "uV787aDKuubsBmui6vN277E4yLZopU7von5t9SW3L8c",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/passkeys/vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+      "request": null,
+      "status": 204,
+      "response": null,
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "request": {},
+      "status": 204,
+      "response": null,
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login/options",
+      "request": {},
+      "status": 200,
+      "response": {
+        "challengeId": "9lf_AjYO1bVQ0vNm6kSny5NmtoeR3GdL5ieZOaHdFik",
+        "options": {
+          "rpId": "portfolio-passkey.duckdns.org",
+          "challenge": "E1_OoRl64MIQOcv6s8lGydCwNaPCRrZvKTachgf_lOw",
+          "timeout": 120000,
+          "userVerification": "required"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login/verify",
+      "request": {
+        "challengeId": "9lf_AjYO1bVQ0vNm6kSny5NmtoeR3GdL5ieZOaHdFik",
+        "credential": {
+          "id": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "rawId": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "response": {
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZsFAAAAAg",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiRTFfT29SbDY0TUlRT2N2NnM4bEd5ZEN3TmFQQ1JyWnZLVGFjaGdmX2xPdyIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "signature": "MEYCIQCosvyBz0KEbH3jrQ8FvlvCqeFCfq2Ry3MemJ2aOjv2KQIhAJ2PBhMXaiVB7EnnhAc-QiESIxiRPm_iE0zGU69Ek1vT",
+            "userHandle": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {},
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 200,
+      "response": {
+        "verified": true
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session",
+      "request": null,
+      "status": 200,
+      "response": {
+        "user": {
+          "id": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+          "name": "live-check-A"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/private",
+      "request": null,
+      "status": 200,
+      "response": {
+        "ownerId": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das",
+        "fictional": true,
+        "notes": [
+          {
+            "id": "dMgytAy6IaAKN7r0ZC8Tz4ndcIzc8dV_VVjehq3vJQk",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "2Km1-qKxJUuqVy7TsMG2QuBoHK5Qzi6AccOu6r7WnZU",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          },
+          {
+            "id": "de3TjuOATMYaxfi8i1Ro-D2UTKKiiuKkhfIl254iT0Y",
+            "title": "[PRIVATE]",
+            "body": "[PRIVATE]"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/passkeys",
+      "request": null,
+      "status": 200,
+      "response": {
+        "keys": [
+          {
+            "id": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+            "name": "검증 A 예비 키",
+            "createdAt": "2026-09-10T08:42:57.442Z",
+            "current": true,
+            "deviceType": "singleDevice",
+            "backedUp": false,
+            "publicKey": "pQECAyYgASFYILq_gPoNS7lDH42wTHezOH485kOmro5ygGLDb9fJZlozIlggn3ua2ba9Dcrt5UPz21rQFkWak2rXiOJOcopniTjhd0Q"
+          }
+        ]
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login/verify",
+      "request": {
+        "challengeId": "9lf_AjYO1bVQ0vNm6kSny5NmtoeR3GdL5ieZOaHdFik",
+        "credential": {
+          "id": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "rawId": "mNWPN770JSITpJIQ0wgb3w8vzEyuRLCgrQlUAEpBYLA",
+          "response": {
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZsFAAAAAg",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiRTFfT29SbDY0TUlRT2N2NnM4bEd5ZEN3TmFQQ1JyWnZLVGFjaGdmX2xPdyIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2V9",
+            "signature": "MEYCIQCosvyBz0KEbH3jrQ8FvlvCqeFCfq2Ry3MemJ2aOjv2KQIhAJ2PBhMXaiVB7EnnhAc-QiESIxiRPm_iE0zGU69Ek1vT",
+            "userHandle": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {},
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 400,
+      "response": {
+        "code": "CHALLENGE_INVALID",
+        "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "request": {},
+      "status": 204,
+      "response": null,
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login/options",
+      "request": {},
+      "status": 200,
+      "response": {
+        "challengeId": "KQBUkhNfoJLipYaETFqSoteDFseFfYLUoESV7ejcFlo",
+        "options": {
+          "rpId": "portfolio-passkey.duckdns.org",
+          "challenge": "FUVnmTY_d7Y96h5jtWR-zFog0j6-rnse8c5Fp9SwBt4",
+          "timeout": 120000,
+          "userVerification": "required"
+        }
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login/verify",
+      "request": {
+        "challengeId": "KQBUkhNfoJLipYaETFqSoteDFseFfYLUoESV7ejcFlo",
+        "credential": {
+          "id": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+          "rawId": "vFXybzL_l9mBl3lvl6P-U1JQ6bkIPmxt7VVS88_pWHo",
+          "response": {
+            "authenticatorData": "MJ1G2ky99gsqu7QzBlc7pmoIZ3tOY9uAKyCRRRtsZZsFAAAAAg",
+            "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiRlVWbm1UWV9kN1k5Nmg1anRXUi16Rm9nMGo2LXJuc2U4YzVGcDlTd0J0NCIsIm9yaWdpbiI6Imh0dHBzOi8vcG9ydGZvbGlvLXBhc3NrZXkuZHVja2Rucy5vcmciLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ",
+            "signature": "MEQCIHOe74Qa20AK9afykdRz-ZwIHc78GVsZsPJUbtJJmq2YAiBpai-r6hmji_ipCCvfScdO8R5m4HjiU23Jj_BgQqmUkw",
+            "userHandle": "wSg7z8TZXqe0JR_zYwRk-uReHngN5alGWfSNNzx_Das"
+          },
+          "type": "public-key",
+          "clientExtensionResults": {},
+          "authenticatorAttachment": "platform"
+        }
+      },
+      "status": 403,
+      "response": {
+        "code": "AUTHENTICATION_FAILED",
+        "error": "등록되지 않았거나 삭제된 패스키입니다."
+      },
+      "cookie": "[REDACTED]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/cancel",
+      "request": {
+        "challengeId": "KQBUkhNfoJLipYaETFqSoteDFseFfYLUoESV7ejcFlo"
+      },
+      "status": 204,
+      "response": null,
+      "cookie": "[REDACTED]"
+    }
+  ]
+}

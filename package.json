@@ -7,10 +7,19 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node scripts/run-tests.mjs"
+    "test": "node scripts/run-tests.mjs",
+    "start": "node server/index.mjs",
+    "test:auth": "node --test tests/auth.integration.mjs",
+    "admin": "node server/admin.mjs"
   },
   "dependencies": {
+    "@simplewebauthn/browser": "^14.0.0",
+    "@simplewebauthn/server": "^14.0.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
     "gsap": "^3.15.0",
+    "helmet": "^8.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

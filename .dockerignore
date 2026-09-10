@@ -1,0 +1,11 @@
+.git
+.deploy-runtime
+node_modules
+data
+dist
+test-results
+playwright-report
+.env
+.env.*
+*.sqlite*
+*.log

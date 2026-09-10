@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experiences, profile, qualityChecks, scope } from "./data/content";
 
 gsap.registerPlugin(ScrollTrigger);
+const privateHref = import.meta.env.BASE_URL === '/' ? '/private' : 'https://portfolio-passkey.duckdns.org/private';
 
 function Header() {
   return (
@@ -16,6 +17,7 @@ function Header() {
         <a href="#intro">소개</a>
         <a href="#experiences">경험</a>
         <a href="#proof">제작 근거</a>
+        <a className="nav-private" href={privateHref}>나만의 공간</a>
         <a className="nav-proof" href="verification.html">검증 안내서</a>
       </nav>
     </header>
@@ -69,6 +71,7 @@ function IntroSection() {
               <p>{scope.privateItems.join(" · ")}</p>
             </div>
           </article>
+          <a className="private-entry" href={privateHref}><strong>나만의 공간 · 잠김</strong><span>패스키로 여는 개인 메모 →</span></a>
         </aside>
       </div>
       <a className="scroll-cue" href="#experiences">

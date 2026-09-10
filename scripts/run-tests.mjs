@@ -11,7 +11,7 @@ const server = spawn(
 
 function isReady() {
   return new Promise((resolve) => {
-    const request = http.get("http://127.0.0.1:4173/one-link-portfolio/", (response) => {
+    const request = http.get("http://127.0.0.1:4173/", (response) => {
       response.resume();
       resolve(response.statusCode === 200);
     });

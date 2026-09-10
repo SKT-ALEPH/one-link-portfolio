@@ -68,6 +68,57 @@ img { max-width: 100%; height: auto; }
   padding: 0.64rem 0.9rem; border: 1px solid rgba(23, 35, 61, 0.22); border-radius: 999px;
 }
 .main-nav .nav-proof::after { display: none; }
+.private-entry { display: grid; gap: 0.35rem; padding: 1rem 1.25rem; border-radius: 16px; background: var(--ink); color: white; text-decoration: none; font-size: 0.9rem; }
+.private-entry span { color: #bdcde9; font-size: 0.875rem; }
+.vault-main { max-width: 1000px; margin: 0 auto; padding: 115px 24px 70px; }
+.vault-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.vault-heading h1 { font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: -0.05em; margin: 0; }
+.vault-heading .eyebrow { font-size: 0.875rem; }
+.vault-state { padding: 0.5rem 1rem; border: 1px solid #b7bfd0; border-radius: 2rem; font-size: 0.875rem; font-weight: 750; }
+.vault-state.open { color: #12604d; background: #d9f5e9; border-color: #83c9b5; }
+.vault-intro, .vault-policy p, .vault-keys > p, .vault-register p { color: #525e72; font-size: 1rem; line-height: 1.8; }
+.vault-message { padding: 1rem 1.1rem; background: #e8efff; border: 1px solid #c6d7fd; border-radius: 12px; font-size: 1rem; line-height: 1.7; min-height: 60px; }
+.vault-lock { background: white; text-align: center; padding: 3rem 1.5rem; border: 1px solid var(--line); border-radius: 24px; }
+.lock-symbol { width: 64px; height: 64px; display: grid; place-items: center; margin: 0 auto; border: 1px solid #c9d5ee; color: var(--blue); border-radius: 20px; font-size: 2.5rem; }
+.vault-lock h2 { font-size: 1.8rem; margin-bottom: 0.6rem; }
+.vault-lock p { line-height: 1.8; color: #525e72; }
+.vault-button { border: 1px solid var(--blue); background: var(--blue); color: white; padding: 0.85rem 1.1rem; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.vault-button.secondary { background: white; border-color: #aeb8c8; color: var(--ink); }
+.vault-button.danger { background: #aa2738; border-color: #aa2738; }
+.vault-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.vault-help { font-size: 0.875rem; margin-top: 1.4rem; }
+.vault-toolbar, .vault-toolbar > div, .vault-section-title { display: flex; align-items: center; justify-content: space-between; gap: 0.65rem; flex-wrap: wrap; }
+.vault-toolbar { margin: 1.5rem 0; }
+.vault-notes { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+.vault-note { background: white; padding: 1.5rem; border: 1px solid var(--line); border-radius: 18px; }
+.vault-note > span { color: #54647b; font-size: 0.875rem; }
+.vault-note h2 { font-size: 1.2rem; line-height: 1.5; margin: 1rem 0; }
+.vault-note p { font-size: 1rem; line-height: 1.8; color: #525e72; overflow-wrap: anywhere; }
+.vault-keys, .vault-register, .vault-policy { margin-top: 2rem; padding: 1.6rem; background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+.vault-section-title h2, .vault-register h2, .vault-policy h2 { font-size: 1.4rem; margin: 0; }
+.vault-keys ul { margin: 0; padding: 0; list-style: none; }
+.vault-keys li { display: flex; justify-content: space-between; align-items: start; gap: 1rem; padding: 1.3rem 0; border-top: 1px solid var(--line); }
+.vault-keys li > div { min-width: 0; }
+.vault-keys li p { font-size: 0.875rem; line-height: 1.7; color: #54647b; }
+.key-current { display: inline-block; margin-left: 0.7rem; color: #255c48; font-size: 0.875rem; }
+.vault-keys details { font-size: 0.875rem; }
+.vault-keys summary { cursor: pointer; padding: 0.4rem 0; }
+.vault-keys code { display: block; overflow-wrap: anywhere; padding: 1rem; background: #f2f5fa; line-height: 1.7; }
+.key-confirm { flex: 0 0 auto; }
+.key-confirm .vault-button { margin: 0.2rem; }
+.vault-register label { display: block; font-size: 0.875rem; margin-bottom: 0.6rem; font-weight: 750; }
+.vault-register form > div { display: flex; gap: 0.75rem; }
+.vault-register input { min-width: 0; flex: 1; padding: 0.9rem; font: inherit; border: 1px solid #9daabd; border-radius: 10px; }
+.vault-policy { background: #eaf0f9; }
+.vault-policy a { font-size: 1rem; color: #214fb5; }
+@media (max-width: 760px) {
+  .main-nav a.nav-private { display: inline-block; font-size: 0.8rem; }
+  .vault-main { padding: 90px 16px 45px; }
+  .vault-notes { grid-template-columns: 1fr; }
+  .vault-keys li, .vault-register form > div { flex-direction: column; }
+  .vault-register input { width: 100%; }
+  .key-current { display: block; margin: 0.4rem 0 0; }
+}
 
 .panel {
   position: relative; min-height: 100svh; scroll-snap-align: start;

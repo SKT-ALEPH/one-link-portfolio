@@ -8,7 +8,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: "list",
   use: {
-    baseURL: "http://127.0.0.1:4173/one-link-portfolio/",
+    baseURL: process.env.TEST_BASE_URL || "http://127.0.0.1:4173/",
     browserName: "chromium",
     launchOptions: localBrowserPath ? { executablePath: localBrowserPath } : undefined,
     colorScheme: "light",

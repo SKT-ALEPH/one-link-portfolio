@@ -1,0 +1,1561 @@
+{
+  "executedAt": "2026-09-10T08:40:37.047Z",
+  "environment": "Local HTTP localhost; software WebAuthn authenticator with real P-256 signatures, not a physical device",
+  "privateKeys": "Generated only in process memory; never sent to server or exported",
+  "requests": [
+    {
+      "label": "미인증 자료 거절",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        }
+      },
+      "response": {
+        "status": 401,
+        "body": {
+          "code": "LOGIN_REQUIRED",
+          "error": "패스키로 먼저 로그인해 주세요."
+        }
+      }
+    },
+    {
+      "label": "초대 없는 등록 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        },
+        "body": {
+          "name": "침입자"
+        }
+      },
+      "response": {
+        "status": 401,
+        "body": {
+          "code": "INVITATION_REQUIRED",
+          "error": "처음 등록할 때는 소유자의 일회용 등록 링크가 필요합니다."
+        }
+      }
+    },
+    {
+      "label": "다른 Origin 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "https://foreign.example",
+          "Cookie": "(none)"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "ORIGIN_REJECTED",
+          "error": "허용되지 않은 출처의 요청입니다."
+        }
+      }
+    },
+    {
+      "label": "취소용 첫 등록 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        },
+        "body": {
+          "name": "취소 키",
+          "invitation": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "OpccUwasMkbvpSOIr957PR2Lk-jfbSe3lj66EWyBlJc",
+          "options": {
+            "challenge": "Lwzq00dLE8vSWEuvVVI_9rbZPZqNivrd45AMrrx0igY",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+              "name": "검증 A",
+              "displayName": "검증 A"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "다른 등록 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "name": "취소 키",
+          "invitation": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "zea-PXslw1pxK4zFSnM1FJYMRxNBcu5ZCk9szEcFqKM",
+          "options": {
+            "challenge": "jOVqKvo-2h13hxDdtZlFZGyTDyYLjLYiacCEwFvfOeo",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+              "name": "검증 A",
+              "displayName": "검증 A"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "등록 취소",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/cancel",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "OpccUwasMkbvpSOIr957PR2Lk-jfbSe3lj66EWyBlJc"
+        }
+      },
+      "response": {
+        "status": 204,
+        "body": ""
+      }
+    },
+    {
+      "label": "취소된 질문 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "OpccUwasMkbvpSOIr957PR2Lk-jfbSe3lj66EWyBlJc",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiTHd6cTAwZExFOHZTV0V1dlZWSV85cmJaUFpxTml2cmQ0NUFNcnJ4MGlnWSIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIaDXcr52_iXiYJiqvPCwREsU6BDlb5Sne6yQgEf2pHWpQECAyYgASFYIKYPyA-Y1ZQQ3NsJJctRMPxgMynpEJaKir0wV83QUArDIlggNx2FMzrjSyZL48jkDeRW-PZtrTXbNyKqnu34tN-NCBs",
+              "transports": [
+                "internal"
+              ]
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+        }
+      }
+    },
+    {
+      "label": "등록 질문 A 노트북",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "name": "A 노트북",
+          "invitation": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "qZzY-wDRLvlPNvKQoA324Eu99IR4JTekVlOj1FUzwB4",
+          "options": {
+            "challenge": "I6f8fsdE7JBfCK9c6cHg7MgNpJm28u8BeE8FK9ExAB8",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+              "name": "검증 A",
+              "displayName": "검증 A"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "등록 성공 A 노트북",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "qZzY-wDRLvlPNvKQoA324Eu99IR4JTekVlOj1FUzwB4",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiSTZmOGZzZEU3SkJmQ0s5YzZjSGc3TWdOcEptMjh1OEJlRThGSzlFeEFCOCIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIaDXcr52_iXiYJiqvPCwREsU6BDlb5Sne6yQgEf2pHWpQECAyYgASFYIKYPyA-Y1ZQQ3NsJJctRMPxgMynpEJaKir0wV83QUArDIlggNx2FMzrjSyZL48jkDeRW-PZtrTXbNyKqnu34tN-NCBs",
+              "transports": [
+                "internal"
+              ]
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "사용한 초대 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        },
+        "body": {
+          "name": "재사용",
+          "invitation": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "INVITATION_INVALID",
+          "error": "사용했거나 만료된 등록 링크입니다."
+        }
+      }
+    },
+    {
+      "label": "등록 질문 A 예비 보안 키",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "name": "A 예비 보안 키"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "NIKMwpQBYXfnz5tTCSizXHXxaV21nP9aQgoxZGgvUT8",
+          "options": {
+            "challenge": "_tpRQZvlDajPpeUAnlpzLFdRgnIJnymHnlNcIwUm_zw",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+              "name": "검증 A",
+              "displayName": "검증 A"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [
+              {
+                "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+                "transports": [
+                  "internal"
+                ],
+                "type": "public-key"
+              }
+            ],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "등록 성공 A 예비 보안 키",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "NIKMwpQBYXfnz5tTCSizXHXxaV21nP9aQgoxZGgvUT8",
+          "credential": {
+            "id": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "rawId": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiX3RwUlFadmxEYWpQcGVVQW5scHpMRmRSZ25JSm55bUhubE5jSXdVbV96dyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIFPUR7s_H4MLRiIxEHLDsmmOa15HMA1ERyyNsAx0xnsJpQECAyYgASFYIN7WW4T2viPdNLQm2BkXP-yN0-au0nJLZhjI3r6ZE7zLIlggC1ITMneCyGLDu0dkuhPZHieAoyWND5RBsB7n8NO4z7I",
+              "transports": [
+                "internal"
+              ]
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "등록 질문 B 노트북",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        },
+        "body": {
+          "name": "B 노트북",
+          "invitation": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "0GlOv7eRCbnN5mtc3Lj1kOuq_L5qxc-IWZze0jQ27T0",
+          "options": {
+            "challenge": "3AodLi2h0mA_rBKjDNY0Fxui3TiBo3KC3KzoFu76d8w",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc",
+              "name": "검증 B",
+              "displayName": "검증 B"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "등록 성공 B 노트북",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "0GlOv7eRCbnN5mtc3Lj1kOuq_L5qxc-IWZze0jQ27T0",
+          "credential": {
+            "id": "obNd11BKIWGnaDqHY8bVJhHjUO5m9bB_qXtS0TuhPFU",
+            "rawId": "obNd11BKIWGnaDqHY8bVJhHjUO5m9bB_qXtS0TuhPFU",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiM0FvZExpMmgwbUFfckJLakROWTBGeHVpM1RpQm8zS0MzS3pvRnU3NmQ4dyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKGzXddQSiFhp2g6h2PG1SYR41DuZvWwf6l7UtE7oTxVpQECAyYgASFYIPfx9YF1SORRlRa9PhT0rs2n92G2FQPy8qk1g_0T9DIMIlggee3Sc-d5YhwI3QMFm1cAtoK2y-lfWXws74J84RJ0aEI",
+              "transports": [
+                "internal"
+              ]
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "A 패스키 두 개",
+      "request": {
+        "method": "GET",
+        "path": "/api/passkeys",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "keys": [
+            {
+              "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+              "name": "A 노트북",
+              "createdAt": "2026-09-10T08:40:36.482Z",
+              "current": false,
+              "deviceType": "singleDevice",
+              "backedUp": false,
+              "publicKey": "pQECAyYgASFYIKYPyA-Y1ZQQ3NsJJctRMPxgMynpEJaKir0wV83QUArDIlggNx2FMzrjSyZL48jkDeRW-PZtrTXbNyKqnu34tN-NCBs"
+            },
+            {
+              "id": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+              "name": "A 예비 보안 키",
+              "createdAt": "2026-09-10T08:40:36.535Z",
+              "current": true,
+              "deviceType": "singleDevice",
+              "backedUp": false,
+              "publicKey": "pQECAyYgASFYIN7WW4T2viPdNLQm2BkXP-yN0-au0nJLZhjI3r6ZE7zLIlggC1ITMneCyGLDu0dkuhPZHieAoyWND5RBsB7n8NO4z7I"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "A 자신의 자료 성공",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "wiC941NKYGFjBle2gNSEYV5wZwfZ3hz80y_1U5eHUKg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "ugpW8lRfFN-2RBxCl3InLeij4HnRaKU7ZmR5POSiJXg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "_Y7LKw5ESizxz_QP7Ol1-JjpOFTG2qur_jv1LyVD8_w",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "B 자신의 자료 성공",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "KQWcIOAM8rSNrwsEXdYuW1cHT26Ipmw8cT5HhEmHr64",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "YhQS_XXV9H0F4aIcw4nYJLLgDyFjXZIQ4GGXbqKS7CA",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "SAxbnR4-pSzstIVcl1qzkSqaivba37e1HIuEWe3dxo0",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "A가 B 자료 요청 거절",
+      "request": {
+        "method": "GET",
+        "path": "/api/users/wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "NOT_YOUR_DATA",
+          "error": "다른 계정의 비공개 자료에는 접근할 수 없습니다."
+        }
+      }
+    },
+    {
+      "label": "B가 A 자료 요청 거절",
+      "request": {
+        "method": "GET",
+        "path": "/api/users/GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "NOT_YOUR_DATA",
+          "error": "다른 계정의 비공개 자료에는 접근할 수 없습니다."
+        }
+      }
+    },
+    {
+      "label": "A가 B 패스키 삭제 거절",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/passkeys/obNd11BKIWGnaDqHY8bVJhHjUO5m9bB_qXtS0TuhPFU",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "NOT_YOUR_KEY",
+          "error": "이 계정의 패스키가 아닙니다."
+        }
+      }
+    },
+    {
+      "label": "거절 뒤 A 자료 건수",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "wiC941NKYGFjBle2gNSEYV5wZwfZ3hz80y_1U5eHUKg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "ugpW8lRfFN-2RBxCl3InLeij4HnRaKU7ZmR5POSiJXg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "_Y7LKw5ESizxz_QP7Ol1-JjpOFTG2qur_jv1LyVD8_w",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "거절 뒤 B 자료 건수",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "KQWcIOAM8rSNrwsEXdYuW1cHT26Ipmw8cT5HhEmHr64",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "YhQS_XXV9H0F4aIcw4nYJLLgDyFjXZIQ4GGXbqKS7CA",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "SAxbnR4-pSzstIVcl1qzkSqaivba37e1HIuEWe3dxo0",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "주소 계정 위조에도 A 자료만 반환",
+      "request": {
+        "method": "GET",
+        "path": "/api/private?userId=wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "wiC941NKYGFjBle2gNSEYV5wZwfZ3hz80y_1U5eHUKg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "ugpW8lRfFN-2RBxCl3InLeij4HnRaKU7ZmR5POSiJXg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "_Y7LKw5ESizxz_QP7Ol1-JjpOFTG2qur_jv1LyVD8_w",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "본문 계정 위조에도 A 자료만 반환",
+      "request": {
+        "method": "POST",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "userId": "wcMosbItNc7t2I3mhyFf7ephotD4snYqWQptffZpgAc"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "ownerId": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+          "fictional": true,
+          "notes": [
+            {
+              "id": "wiC941NKYGFjBle2gNSEYV5wZwfZ3hz80y_1U5eHUKg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "ugpW8lRfFN-2RBxCl3InLeij4HnRaKU7ZmR5POSiJXg",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            },
+            {
+              "id": "_Y7LKw5ESizxz_QP7Ol1-JjpOFTG2qur_jv1LyVD8_w",
+              "title": "[PRIVATE]",
+              "body": "[PRIVATE]"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "로그아웃",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/logout",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 204,
+        "body": "",
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "로그아웃 뒤 같은 세션 재사용 거절",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 401,
+        "body": {
+          "code": "LOGIN_REQUIRED",
+          "error": "패스키로 먼저 로그인해 주세요."
+        }
+      }
+    },
+    {
+      "label": "올바른 서명 로그인 성공 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "Q1oC1im1pgIwMdPdmOhF7_M8SeptKuFE9qAPILdM9Ys",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "QmjSnQIW0nZ6T238tVPgPt_ak1lJ-n2Rp7aoEJHNZqY",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "올바른 서명 로그인 성공",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "Q1oC1im1pgIwMdPdmOhF7_M8SeptKuFE9qAPILdM9Ys",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiUW1qU25RSVcwblo2VDIzOHRWUGdQdF9hazFsSi1uMlJwN2FvRUpITlpxWSIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAQ",
+              "signature": "MEUCIQCnFVV2RZngfSh2rosPqLjK0OksIZcsC67Aq1Kq0MVOiwIgAue0Iv3DOWRZiQcM632lXxPoGrKvhxGlDdfSrzJ0KvY",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "사용한 로그인 질문 재사용 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "Q1oC1im1pgIwMdPdmOhF7_M8SeptKuFE9qAPILdM9Ys",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiUW1qU25RSVcwblo2VDIzOHRWUGdQdF9hazFsSi1uMlJwN2FvRUpITlpxWSIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAQ",
+              "signature": "MEUCIQCnFVV2RZngfSh2rosPqLjK0OksIZcsC67Aq1Kq0MVOiwIgAue0Iv3DOWRZiQcM632lXxPoGrKvhxGlDdfSrzJ0KvY",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+        }
+      }
+    },
+    {
+      "label": "틀린 서명 로그인 거절 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "3xryk1zQ9oMAq-CQCsZNMa5dVMflQXJsd1DikyEaM0c",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "0CjOoYPesYj9Caw-e1XjFuE9JbvPFamE_djhNoA-9PE",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "틀린 서명 로그인 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "3xryk1zQ9oMAq-CQCsZNMa5dVMflQXJsd1DikyEaM0c",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiMENqT29ZUGVzWWo5Q2F3LWUxWGpGdUU5SmJ2UEZhbUVfZGpoTm9BLTlQRSIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAg",
+              "signature": "MEYCIQDNqx8qZov2wUirlQ2hC2Uj-S3w82OacQk4e2ThdmuSYQIhAJcxhoInwXRHJv20VhKE2Fh-8MT2oqBsR-NOg6OgLpA2",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "AUTHENTICATION_FAILED",
+          "error": "패스키 서명을 확인하지 못했습니다."
+        }
+      }
+    },
+    {
+      "label": "만료용 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "btCv0Y_3wP3lTMu2M4ve6HexzeQ5FmhatLI0K9u24Q8",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "kV0yxoCVFso8B4iksP0f1-ea5IUa0VGXdDYxmBffeb4",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "만료된 질문 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "btCv0Y_3wP3lTMu2M4ve6HexzeQ5FmhatLI0K9u24Q8",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoia1YweXhvQ1ZGc284QjRpa3NQMGYxLWVhNUlVYTBWR1hkRFl4bUJmZmViNCIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAw",
+              "signature": "MEUCIQDc5baWHlNFEF-GAfbA7OJtcz8iQ6jXy5SJopvF8OyD9QIged8zC26QueT9Cy3L1WskHNKeUQv-Q-yLGx7pSDaxBR4",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+        }
+      }
+    },
+    {
+      "label": "Origin 검증용 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "-OH-kV4J3nWqJqbfpcvXk6upQRELRyZWYRyhYHU4COg",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "1SPJ0HqjVPGhz8rcV3COT_j5wD-nFA-b7U0VJcX4Bz8",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "서명된 다른 Origin 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "-OH-kV4J3nWqJqbfpcvXk6upQRELRyZWYRyhYHU4COg",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiMVNQSjBIcWpWUEdoejhyY1YzQ09UX2o1d0QtbkZBLWI3VTBWSmNYNEJ6OCIsIm9yaWdpbiI6Imh0dHBzOi8vZm9yZWlnbi5leGFtcGxlIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAABA",
+              "signature": "MEYCIQD1Gbga68glzBPJedhL6wz4cvY2c-glzJJ5d1HnEwZxSAIhAMuUg6KEPsSjkA3i2h9LAZyoJaHFRa8AI78fJS52n4KW",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "AUTHENTICATION_FAILED",
+          "error": "패스키 서명을 확인하지 못했습니다."
+        }
+      }
+    },
+    {
+      "label": "동시 재사용용 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "6gl5iIYwaKFemKxGX1hgFYph7t7ZVCNYKA-u4MP5DEE",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "GiZtV91ZO__E8Ke_M2gxiBbiY-_fPNhvFuCTDtlANF4",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "동시 로그인 2",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "6gl5iIYwaKFemKxGX1hgFYph7t7ZVCNYKA-u4MP5DEE",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiR2ladFY5MVpPX19FOEtlX00yZ3hpQmJpWS1fZlBOaHZGdUNURHRsQU5GNCIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAABQ",
+              "signature": "MEUCIQClyO2lZHh9rc6k2RuUBhgQfiaiAXaRGU16DYJhZyxntAIgL7H8jn4fqMVo0LDbOn_5vvQdS0IKTNzERIJu78A6r2M",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+        }
+      }
+    },
+    {
+      "label": "동시 로그인 1",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "6gl5iIYwaKFemKxGX1hgFYph7t7ZVCNYKA-u4MP5DEE",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiR2ladFY5MVpPX19FOEtlX00yZ3hpQmJpWS1fZlBOaHZGdUNURHRsQU5GNCIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAABQ",
+              "signature": "MEUCIQClyO2lZHh9rc6k2RuUBhgQfiaiAXaRGU16DYJhZyxntAIgL7H8jn4fqMVo0LDbOn_5vvQdS0IKTNzERIJu78A6r2M",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "A 패스키 하나 삭제",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/passkeys/hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 204,
+        "body": ""
+      }
+    },
+    {
+      "label": "삭제한 키의 세션 거절",
+      "request": {
+        "method": "GET",
+        "path": "/api/private",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 401,
+        "body": {
+          "code": "LOGIN_REQUIRED",
+          "error": "패스키로 먼저 로그인해 주세요."
+        }
+      }
+    },
+    {
+      "label": "남은 A 패스키 로그인 성공 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "dbG7RPH6RDU5_o3y0f4118LowRfkNxffpjhPK8SHq_s",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "LUCgMVEXQhSDm3-Fc92t16Cvn9pyLGwQDwO9-csJ5vs",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "남은 A 패스키 로그인 성공",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "dbG7RPH6RDU5_o3y0f4118LowRfkNxffpjhPK8SHq_s",
+          "credential": {
+            "id": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "rawId": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiTFVDZ01WRVhRaFNEbTMtRmM5MnQxNkN2bjlweUxHd1FEd085LWNzSjV2cyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAQ",
+              "signature": "MEYCIQDNWP9Lr7p3cSdGq_rBd17ElwXj1UD3Ou_yq-OZslwxuQIhAMnghh7TfkbiMCkuOPGS9Y9JCZTGZDX8NjJ2bNmtU8AF",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "verified": true
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "삭제한 A 패스키 로그인 거절 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "uk2iivMD5NYVzxeNTHO5eHv0yky-yruC1md00RWdXJ0",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "nUDsn4Sx-5kMXJbdldqlNZ2TzV4cHNOsakJG5HrKlq0",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "삭제한 A 패스키 로그인 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "uk2iivMD5NYVzxeNTHO5eHv0yky-yruC1md00RWdXJ0",
+          "credential": {
+            "id": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "rawId": "hoNdyvnb-JeJgmKq88LBESxToEOVvlKd7rJCAR_akdY",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiblVEc240U3gtNWtNWEpiZGxkcWxOWjJUelY0Y0hOT3Nha0pHNUhyS2xxMCIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAABg",
+              "signature": "MEUCID-jovdFd6G6iRKjowaGE1m9jL7Icuyxuk_gN3KboM0bAiEAsQB0V44ZJqCu2V2pMUYzwYb_2UcfFL5Odom1VVgG6Js",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 403,
+        "body": {
+          "code": "AUTHENTICATION_FAILED",
+          "error": "등록되지 않았거나 삭제된 패스키입니다."
+        }
+      }
+    },
+    {
+      "label": "마지막 패스키 삭제 거절",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/passkeys/U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 409,
+        "body": {
+          "code": "LAST_KEY",
+          "error": "마지막 패스키는 삭제할 수 없습니다. 먼저 다른 패스키를 등록해 주세요."
+        }
+      }
+    },
+    {
+      "label": "브라우저 바인딩 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "b3g5RSyJOE7IqUc1zFgAO83O5N8MEbDEImQXdTsp0D0",
+          "options": {
+            "rpId": "localhost",
+            "challenge": "hMG8NK_K7fP3eoL8As3F3wjnlshi9oWAD4lwqqjv9ic",
+            "timeout": 120000,
+            "userVerification": "required"
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "다른 브라우저의 질문 도용 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/login/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "(none)"
+        },
+        "body": {
+          "challengeId": "b3g5RSyJOE7IqUc1zFgAO83O5N8MEbDEImQXdTsp0D0",
+          "credential": {
+            "id": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "rawId": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiaE1HOE5LX0s3ZlAzZW9MOEFzM0Yzd2pubHNoaTlvV0FENGx3cXFqdjlpYyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MFAAAAAg",
+              "signature": "MEQCIFhX68Pun5lL--UWag_TaFlnNkERuwqlWKQ3e2JzctBKAiBLiuTeE82nxeLx-MmsliowUPYmmZVIB9SfPX8ck-1s4g",
+              "userHandle": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI"
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "인증 요청이 없거나 만료되었습니다. 다시 시작해 주세요."
+        }
+      }
+    },
+    {
+      "label": "로그아웃 이전 추가 등록 질문",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/options",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "name": "세션 만료 키"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "challengeId": "3lSQXM6-mjv3HThhEDPeRMP0U5sV2ixHTrmBTPGIREU",
+          "options": {
+            "challenge": "fN3548cLsTeQUaayC6pW33qV01ZGKzRFWuL5zlojBgw",
+            "rp": {
+              "name": "One Link · 나만의 공간",
+              "id": "localhost"
+            },
+            "user": {
+              "id": "GfXqSK70FWEKt0Nd_Wukk_RRhNxQcIKXpQVtgz7FyyI",
+              "name": "검증 A",
+              "displayName": "검증 A"
+            },
+            "pubKeyCredParams": [
+              {
+                "alg": -7,
+                "type": "public-key"
+              },
+              {
+                "alg": -257,
+                "type": "public-key"
+              }
+            ],
+            "timeout": 120000,
+            "attestation": "none",
+            "excludeCredentials": [
+              {
+                "id": "U9RHuz8fgwtGIjEQcsOyaY5rXkcwDURHLI2wDHTGewk",
+                "transports": [
+                  "internal"
+                ],
+                "type": "public-key"
+              }
+            ],
+            "authenticatorSelection": {
+              "residentKey": "required",
+              "userVerification": "required",
+              "requireResidentKey": true
+            },
+            "extensions": {
+              "credProps": true
+            },
+            "hints": []
+          }
+        },
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "추가 등록 중 로그아웃",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/logout",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {}
+      },
+      "response": {
+        "status": 204,
+        "body": "",
+        "setCookie": "[REDACTED]"
+      }
+    },
+    {
+      "label": "로그아웃 후 등록 검증 거절",
+      "request": {
+        "method": "POST",
+        "path": "/api/auth/register/verify",
+        "headers": {
+          "Origin": "http://localhost:3187",
+          "Cookie": "[REDACTED]"
+        },
+        "body": {
+          "challengeId": "3lSQXM6-mjv3HThhEDPeRMP0U5sV2ixHTrmBTPGIREU",
+          "credential": {
+            "id": "wnhVQrfkLuk21Bpo0AF76JLxseeyr7WpcLxTSZ2NfwE",
+            "rawId": "wnhVQrfkLuk21Bpo0AF76JLxseeyr7WpcLxTSZ2NfwE",
+            "type": "public-key",
+            "response": {
+              "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiZk4zNTQ4Y0xzVGVRVWFheUM2cFczM3FWMDFaR0t6UkZXdUw1emxvakJndyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzE4NyIsImNyb3NzT3JpZ2luIjpmYWxzZX0",
+              "attestationObject": "o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NFAAAAAAAAAAAAAAAAAAAAAAAAAAAAIMJ4VUK35C7pNtQaaNABe-iS8bHnsq-1qXC8U0mdjX8BpQECAyYgASFYIO4EEdbQOQKsoamIoAt3PJAoaMRt9D2TYf8mkTWBNAZ2IlggC1swE-bRVE3BUi1m9iIXvs3kdao8l28JgERKpnBD2u0",
+              "transports": [
+                "internal"
+              ]
+            },
+            "clientExtensionResults": {}
+          }
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "code": "CHALLENGE_INVALID",
+          "error": "이미 사용했거나 만료된 인증 요청입니다. 다시 시작해 주세요."
+        }
+      }
+    }
+  ]
+}
